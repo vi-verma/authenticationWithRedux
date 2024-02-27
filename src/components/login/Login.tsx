@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { fetchUserLogin } from "../../../store/reducer/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
