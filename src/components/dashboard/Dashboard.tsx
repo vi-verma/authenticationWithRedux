@@ -1,5 +1,6 @@
 import Navigation from '../navigation/Navigation'
 
+
 const Dashboard = () => {
   return (
     <div className="bg-hero h-[100vh] bg-no-repeat bg-cover bg-center bg-fixed ">
