@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../../store/reducer/authReducer";
 import { FaRegUser } from "react-icons/fa";
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const nevigate = useNavigate();
   const stateData = useSelector(
     (state: any) => state?.authenticatedUserSliceReducer
   );
+  console.log('stateData',stateData)
+
+  useEffect(()=> {
+    !stateData?.token && nevigate('/login')
+  },[nevigate, stateData?.token])
 
   const doLogut = () => {
     dispatch(logout());
