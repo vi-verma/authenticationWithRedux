@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface AuthInterface {
   token: string;
@@ -56,9 +55,8 @@ export const authenticatedUserSlice = createSlice({
     );
     builder.addCase(
       fetchUserLogin.rejected,
-      (state: any, action: { payload: object }) => {
+      (state: any) => {
         state.isLoading = false;
-        // state.error = action.error.message
       }
     );
   },

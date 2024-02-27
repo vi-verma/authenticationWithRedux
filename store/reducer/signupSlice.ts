@@ -50,7 +50,7 @@ export const createUserSlice = createSlice({
     );
     builder.addCase(
       createUser.rejected,
-      (state: any, action: { payload: object }) => {
+      (state: any) => {
         state.isLoading = false;
         // state.error = action.error.message
       }
