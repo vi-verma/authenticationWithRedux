@@ -16,17 +16,13 @@ const initialState: SignUpUser = {
 export const createUser: any = createAsyncThunk(
   "users/signup",
   async (val: { password: string; email: string }) => {
-    console.log(val, "data");
-
     const response = await fetch(`https://reqres.in/api/register`, {
       method: "post",
-      body: JSON.stringify({email: val.email, password: val.password}),
+      body: JSON.stringify({ email: val.email, password: val.password }),
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     });
-    console.log('response',response);
-    
     const data = await response.json();
     return data;
   }
@@ -36,6 +32,9 @@ export const createUserSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
+    // logout: (state) => {
+    //   return { ...state, isLoggedIn: false, token: "" };
+    // },
   },
   extraReducers: (builder: any) => {
     builder.addCase(createUser.pending, (state: any) => {
@@ -60,6 +59,6 @@ export const createUserSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-// export const { login, logout } = authenticatedUserSlice.actions;
+// export const { logout } = createUserSlice.actions;
 
 export default createUserSlice.reducer;

@@ -16,8 +16,6 @@ const initialState: AuthInterface = {
 export const fetchUserLogin: any = createAsyncThunk(
   "users/doLogin",
   async (val: { password: string; email: string }) => {
-    console.log(val, "data");
-
     const response = await fetch(`https://reqres.in/api/login`, {
       method: "post",
       body: JSON.stringify({email: val.email||"eve.holt@reqres.in", password: val.password|| 'cityslicka'}),
@@ -25,8 +23,6 @@ export const fetchUserLogin: any = createAsyncThunk(
         "content-type": "application/json"
       }
     });
-    console.log('response',response);
-    
     const data = await response.json();
     return data;
   }
@@ -40,9 +36,9 @@ export const authenticatedUserSlice = createSlice({
     //   console.log('pyload', action, "state",state)
     //   return {...state, isLoggedIn: action.payload.isLoggedIn, token: action.payload.token };
     // },
-    // logout: (state) => {
-    //   return {...state, isLoggedIn: false, token: '' };
-    // },
+    logout: (state) => {
+      return {...state, isLoggedIn: false, token: '' };
+    },
     // incrementByAmount: (state, action: PayloadAction<number>) => {
     //   state.value += action.payload;
   },
@@ -69,6 +65,6 @@ export const authenticatedUserSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-// export const { login, logout } = authenticatedUserSlice.actions;
+export const { logout } = authenticatedUserSlice.actions;
 
 export default authenticatedUserSlice.reducer;

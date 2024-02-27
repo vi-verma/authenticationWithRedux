@@ -1,20 +1,22 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { createUser } from "../../../store/reducer/signupSlice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const nevigate = useNavigate();
-  const state = useSelector((state: any) => state);
+  const loading = useSelector(
+    (state: any) => state.authenticatedUserSliceReducer.isLoading
+  );
+  // const state = useSelector((state: any) => state);
 
   const [acceptTerms, setAcceptTerms] = useState(false);
 
-  console.log("state", state);
-
   const handleCheckTerms = (e: any) => {
-    console.log("res", e.target.checked);
     setAcceptTerms(e.target.checked);
   };
 
@@ -22,9 +24,9 @@ const Signup = () => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    const loginResponse = dispatch(createUser({ email, password }));
-    nevigate("/login");
-    console.log("event", await loginResponse);
+    const loginResponse =await  dispatch(createUser({ email, password }));
+    loginResponse?.payload?.token && nevigate("/login");
+    loginResponse?.payload?.token && alert('User Created Successfully')
   };
 
   return (
@@ -75,7 +77,7 @@ const Signup = () => {
                   Confirm password
                 </label>
                 <input
-                  type="confirmPassword"
+                  type="password"
                   name="confirmPassword"
                   id="confirmPassword"
                   placeholder="••••••••"
@@ -112,7 +114,19 @@ const Signup = () => {
                 className={`w-full text-white ${acceptTerms ?'bg-primary-600': 'bg-primary-200'} hover:${acceptTerms ? 'bg-primary-700': 'bg-primary-200'} focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
                 disabled={!acceptTerms}
               >
-                Create an account
+                {loading ? (
+                    <ClipLoader
+                      color={'white'}
+                      loading={loading}
+                      // cssOverride={override}
+                      size={14}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                  ) : (
+                    " Create an account"
+                  )}
+               
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
