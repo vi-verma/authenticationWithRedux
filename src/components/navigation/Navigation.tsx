@@ -10,7 +10,6 @@ const Navigation = () => {
   const stateData = useSelector(
     (state: any) => state?.authenticatedUserSliceReducer
   );
-  console.log('stateData',stateData)
 
   useEffect(()=> {
     !stateData?.token && nevigate('/login')
