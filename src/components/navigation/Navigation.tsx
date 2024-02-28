@@ -12,7 +12,9 @@ const Navigation = () => {
   );
 
   useEffect(()=> {
-    !stateData?.token && nevigate('/login')
+    return()=>{
+      nevigate('/login')
+    }
   },[nevigate, stateData?.token])
 
   const doLogut = () => {
@@ -28,7 +30,7 @@ const Navigation = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="about">About</Link>
+              <Link to="/">About</Link>
             </li>
           </>
         )}

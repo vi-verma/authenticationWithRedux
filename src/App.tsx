@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const isLoggedIn = useSelector((state: any)=> state.authenticatedUserSliceReducer?.isLoggedIn)
-  
+
   return (
     <Routes>
       {isLoggedIn && <Route path="dashboard" element={ <Dashboard/> } />}
