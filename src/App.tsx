@@ -5,7 +5,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const isLoggedIn = useSelector((state: any)=> state?.authenticatedUserSlice?.isLoggedIn)
+  const isLoggedIn = useSelector((state: any)=> state.authenticatedUserSliceReducer?.isLoggedIn)
   
   return (
     <Routes>
