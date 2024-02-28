@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 export interface AuthInterface {
   token: string;
@@ -23,6 +24,9 @@ export const fetchUserLogin: any = createAsyncThunk(
       }
     });
     const data = await response.json();
+    console.log("data",data );
+    data?.error && toast(data?.error)
+    
     return data;
   }
 );
